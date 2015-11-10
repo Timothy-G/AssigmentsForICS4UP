@@ -302,17 +302,17 @@ public class MainClass {
 	 public static void deleteContestant(ArrayList <ContestantInformation> aL){
 		 ContestantInformation contestant = new ContestantInformation();
 		 String input = scan.nextLine();
-		// String lastname = scan.nextLine();
+		//String lastname = scan.nextLine();
 		// String firstname = scan.nextLine();
 		 
 		 	System.out.println("Choose one of the following options.");
-			System.out.println("1. Delete by placement.");
-			System.out.println("2. Delete by name (first and last).");
+			System.out.println("1. Delete by name  (last name).");
 		
-			if(input.equals("1")){
-				int index = SearchingArrays.linearSearch(aL, contestant);
-				aL.remove(index);
+			for(int i = 0; i < aL.size();i++){
+			if(input.equals(aL.get(i).getLname())){
+				System.out.println(aL.get(i).getFname() + aL.get(i).getLname());
 			}
+		}
 	 }
 	 /**
 	  * @param aL

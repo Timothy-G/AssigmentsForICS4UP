@@ -144,13 +144,15 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return Fname
+	 * gets the first name
 	 */
 	public String getFname() {
 		return this.Fname;
 	}
 	/**
 	 * 
-	 * @return Lname 
+	 * @return Lname
+	 * gets the last name 
 	 */
 	public String getLname() {
 		return this.Lname;
@@ -159,6 +161,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return StName
+	 * gets the st name
 	 */
 	public String getStName() {
 		return this.StName;
@@ -166,6 +169,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return Province
+	 * gets the province
 	 */
 	public Province getProvince() {
 		return this.province;
@@ -173,6 +177,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return City
+	 * gets the city
 	 */
 	public String getCity() {
 		return this.City;
@@ -180,6 +185,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return StNum
+	 * gets the st number
 	 */
 	public int getStNum() {
 		return this.StNum;
@@ -187,6 +193,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return PhoneNum
+	 * gest the phone number
 	 */
 	public String getPhoneNum() {
 		return this.PhoneNum;
@@ -194,6 +201,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return Bday 
+	 * gets the birth day
 	 */
 	public Calendar getBday() {
 		return this.Bday;
@@ -201,6 +209,7 @@ public class ContestantInformation implements Comparable {
 	/**
 	 * 
 	 * @return PostalCode
+	 * gets the postalcode
 	 */
 	public String getPostalCode() {
 		return this.PostalCode;
@@ -257,6 +266,7 @@ public class ContestantInformation implements Comparable {
 	 * 
 	 * @param ci
 	 * @return
+	 * compairs one contestant to another
 	 */
 	public int compareTo(Object agrs){
 		ContestantInformation ci = (ContestantInformation)agrs;
@@ -276,6 +286,7 @@ public class ContestantInformation implements Comparable {
 	 * 
 	 * @param ci
 	 * @return
+	 * and equals method in case there are 2 people with the same name 
 	 */
 	
  public boolean equals(ContestantInformation ci){

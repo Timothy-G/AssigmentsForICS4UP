@@ -5,6 +5,7 @@ package gerard;
 
 /**
  * @author Timothy Gerard 
+ * an enum for the provances
  *
  */
 public enum Province {

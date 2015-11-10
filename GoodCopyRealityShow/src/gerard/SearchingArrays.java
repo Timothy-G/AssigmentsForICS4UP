@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author 322040049
+ * this will search for the user in a linear or binary fastion
  *
  */
 public class SearchingArrays {

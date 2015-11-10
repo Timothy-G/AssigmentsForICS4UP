@@ -9,10 +9,13 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
 /**
  * @author Timothy Gerard 
+ * This class i s the main class and exicutes the program
  *
  */
 import java.util.Scanner;
@@ -318,8 +321,9 @@ public class MainClass {
 	  */
 	 
 	 public static void save(ArrayList <ContestantInformation> aL) throws FileNotFoundException{
+		
 		 PrintStream fps = new PrintStream("contestant.txt");
-		 ContestantInformation contestant = new ContestantInformation();
+		 ContestantInformation contestant;
 		 for(int i = 0; i < aL.size();i++){
 			 fps.println(aL.get(i).toString());
 		 }
@@ -337,7 +341,7 @@ public class MainClass {
 		 for(int i = 0; i < aL.size();i++){
 			String ReadLines;
 			 ReadLines = fbr.readLine(); 
-			 String[] array = ReadLines.split(" ");
+			 String[] array = ReadLines.split(", ");
 			 aL.add(new ContestantInformation());
 			 aL.get(i).setFname(array[0]);
 			 aL.get(i).setLname(array[1]);
@@ -350,6 +354,15 @@ public class MainClass {
 			 aL.get(i).setPhoneNum(array[8]);
 			 
 		 }
+	 }
+	 /**
+	  * 
+	  * @param aL
+	  * sorts the contestants in the array list 
+	  */
+	 public static void sort(ArrayList <ContestantInformation> aL){
+		 ContestantInformation contestants;
+		 Collections.sort(contestants);
 	 }
 	/**
 	 * @param args

@@ -16,18 +16,18 @@ public class Label {
 		formatPhoneNum();
 	}
 	public void formatName(){
-		this.output = ci.getFname() + ", " + ci.getLname();
+		this.output = ci.getFname() + " " + ci.getLname();
 		//return formatName();
 		
 	}
 	public void formatAdress(){
-		this.output = output + ci.getStNum() + ci.getStName();
-		this.output = output + ci.getCity() + ci.getProvince();
-		this.output = output + ci.getPostalCode();
+		this.output = output + ", " +  ci.getStNum() + ", " + ci.getStName();
+		this.output = output + ", " + ci.getCity() + ", " + ci.getProvince();
+		this.output = output + ", " + ci.getPostalCode();
 		//return formatAdress();
 	}
 	public void formatPhoneNum(){
-		this.output = output + ci.getPhoneNum();
+		this.output = output + ", " + ci.getPhoneNum();
 		//return formatPhoneNum();
 }
 	public String toString(){

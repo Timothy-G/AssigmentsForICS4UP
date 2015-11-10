@@ -2,6 +2,11 @@
  * 
  */
 package gerard;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -10,6 +15,7 @@ import java.util.Scanner;
  * @author Timothy Gerard 
  *
  */
+import java.util.Scanner;
 public class MainClass {
 	/**
 	 * 
@@ -53,7 +59,7 @@ public class MainClass {
 	  * @return
 	  * method for the name of the province
 	  */
-	public static Province FindProv(String prov){
+	public static Province findProv(String prov){
 		if (prov.equalsIgnoreCase("Alberta")||prov.equalsIgnoreCase("AB"))
 			return Province.AB;		
 		else if (prov.equalsIgnoreCase("BrithishColumbia")||prov.equalsIgnoreCase("BC")|| prov.equalsIgnoreCase("Brithish Columbia"))
@@ -191,9 +197,10 @@ public class MainClass {
 			do{
 				flag = false;
 				try{
-					System.out.print("What Province do you live in?");
+					System.out.println("What Province do you live in?");
+					System.out.println("Please use one of the following: AB, BC, MB, NB, NL, NS, NT, NU, ON, PEI, QC, YT, SK");
 					prov = scan.nextLine();
-					contestant.setProvince(FindProv(prov));
+					contestant.setProvince(findProv(prov));
 				}catch(InvalidInputException e)
 				{
 					System.out.print(e.getMessage());
@@ -259,11 +266,12 @@ public class MainClass {
 	 /**
 	  * 
 	  * @param aL
+	  * 
 	  * allows the user to search for a contestant
 	  */
 	 
 	 public static void search(ArrayList <ContestantInformation> aL){
-		 ContestantInformation contestant = new ContestantInformation();
+		 ContestantInformation contestant;
 		 SearchingArrays Search = new SearchingArrays();
 			System.out.println("Enter Last Name: ");
 			String lastname = scan.nextLine();
@@ -282,21 +290,80 @@ public class MainClass {
 		 
 	 }
 	 
+	 /**
+	  * @param aL
+	  * 
+	  * method that delete the contestant information
+	  */
+	 
 	 public static void deleteContestant(ArrayList <ContestantInformation> aL){
 		 ContestantInformation contestant = new ContestantInformation();
-		 //contestant.remove();
+		 String input = scan.nextLine();
+		// String lastname = scan.nextLine();
+		// String firstname = scan.nextLine();
+		 
+		 	System.out.println("Choose one of the following options.");
+			System.out.println("1. Delete by placement.");
+			System.out.println("2. Delete by name (first and last).");
+		
+			if(input.equals("1")){
+				int index = SearchingArrays.linearSearch(aL, contestant);
+				aL.remove(index);
+			}
 	 }
+	 /**
+	  * @param aL
+	 * @throws FileNotFoundException
+	 * the method save the contestant information that is stored in the arraylist to a text file 
+	  */
 	 
-	
+	 public static void save(ArrayList <ContestantInformation> aL) throws FileNotFoundException{
+		 PrintStream fps = new PrintStream("contestant.txt");
+		 ContestantInformation contestant = new ContestantInformation();
+		 for(int i = 0; i < aL.size();i++){
+			 fps.println(aL.get(i).toString());
+		 }
+	 }
+	 /**
+	  * @param aL
+	 * @throws IOException
+	 * @throws InvalidInputException 
+	 * 
+	 *  the method that loads the contestants information
+	  */
+	 public static void load(ArrayList <ContestantInformation> aL) throws IOException, InvalidInputException{
+		 BufferedReader fbr = new BufferedReader(new FileReader("contestant.txt"));
+		 
+		 for(int i = 0; i < aL.size();i++){
+			String ReadLines;
+			 ReadLines = fbr.readLine(); 
+			 String[] array = ReadLines.split(" ");
+			 aL.add(new ContestantInformation());
+			 aL.get(i).setFname(array[0]);
+			 aL.get(i).setLname(array[1]);
+			 //aL.get(i).setBday(array[2]);
+			 aL.get(i).setStNum(array[3]);
+			 aL.get(i).setStName(array[4]);
+			 aL.get(i).setProvince(findProv(array[5]));
+			 aL.get(i).setCity(array[6]);
+			 aL.get(i).setPostalCode(array[7]);
+			 aL.get(i).setPhoneNum(array[8]);
+			 
+		 }
+	 }
 	/**
 	 * @param args
+	 * @throws InvalidInputException 
+	 * @throws IOException 
+	 * 
+	 * This is the main method where the program is exicuted.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InvalidInputException {
 		// TODO Auto-generated method stub
 		
 		ArrayList<ContestantInformation> aL = new ArrayList<ContestantInformation>();
-		ContestantInformation contestant = new ContestantInformation();
-		String inpjut;
+		ContestantInformation contestant;
+		String input;
 		boolean done = false;
 		
 		while(!done){
@@ -306,23 +373,29 @@ public class MainClass {
 		System.out.println("3. Search for a contestant.");
 		System.out.println("4. Delete contestant");
 		System.out.println("5. Delete all the contestants");
-		System.out.println("6. Exit Program.");
+		System.out.println("6. Save a contestant to a text document");
+		System.out.println("7. Load a contestant to a text documanet");
+		System.out.println("8. Exit Program.");
 		
-		inpjut = scan.nextLine();
+		input = scan.nextLine();
 		
-		if (inpjut.equals("1"))
+		if (input.equals("1"))
 			addContestant(aL);
-		else if (inpjut.equals("2"))
+		else if (input.equals("2"))
 			 printAllLabel(aL);
-		else if(inpjut.equals("3"))
+		else if(input.equals("3"))
 			search(aL);
-		else if(inpjut.equals("4"))
+		else if(input.equals("4"))
 			deleteContestant(aL);
-		//else if (inpjut.equals("5"))
-		//aL.removeALL(contestant);
-		else if(inpjut.equals("6"))
-			done = true;
-		}
+		else if (input.equals("5"))
+			aL.removeAll(aL);
+		else if (input.equals("6"))
+			save(aL);
+		else if (input.equals("7"))	
+			load(aL);
+		else if(input.equals("8"))
+			System.exit(0);
+		 }done = true;
 	}
 
 }
